@@ -9,7 +9,7 @@ function Login() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm({
     mode: "onBlur",
     defaultValues: {
@@ -59,7 +59,7 @@ function Login() {
           />
           {errors.password && <p className="text-danger">{errors.password.message}</p>}
         </div>
-        <button type="submit" className="btn btn-primary">
+        <button type="submit" className="btn btn-primary" disabled={!isValid}>
           登入
         </button>
       </form>
