@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useForm } from "react-hook-form";
+import { emailValidation } from "../../utils/validation";
 
 const API_BASE = import.meta.env.VITE_API_BASE;
 const API_PATH = import.meta.env.VITE_API_PATH;
@@ -28,7 +29,6 @@ function Login() {
       console.log(error.response.data.message);
     }
   };
-
   return (
     <div className="container p-4">
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -36,21 +36,7 @@ function Login() {
           <label htmlFor="userName" className="form-label">
             帳號
           </label>
-          <input
-            type="email"
-            name="username"
-            className="form-control"
-            id="userName"
-            aria-describedby="userName"
-            placeholder="email"
-            {...register("username", {
-              required: "請輸入email",
-              pattern: {
-                value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                message: "Email格式不正確",
-              },
-            })}
-          />
+          <input type="email" name="username" className="form-control" id="userName" aria-describedby="userName" placeholder="email" {...register("username", emailValidation)} />
           {errors.username && <p className="text-danger">{errors.username.message}</p>}
         </div>
         <div className="mb-3">

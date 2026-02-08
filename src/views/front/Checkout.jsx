@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { ThreeDots, Oval, Puff, RotatingLines } from "react-loader-spinner";
 import * as bootstrap from "bootstrap";
 import SingleProductModal from "../../components/SingleProductModal";
+import { emailValidation } from "../../utils/validation";
 
 const API_BASE = import.meta.env.VITE_API_BASE;
 const API_PATH = import.meta.env.VITE_API_PATH;
@@ -259,20 +260,7 @@ function Checkout() {
               <label htmlFor="email" className="form-label">
                 Email
               </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                className="form-control"
-                placeholder="請輸入 Email"
-                {...register("email", {
-                  required: "請輸入Email",
-                  pattern: {
-                    value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                    message: "Email格式不正確",
-                  },
-                })}
-              />
+              <input id="email" name="email" type="email" className="form-control" placeholder="請輸入 Email" {...register("email", emailValidation)} />
               {errors.email && <p className="text-danger">{errors.email.message}</p>}
             </div>
 
